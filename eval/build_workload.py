@@ -5,11 +5,18 @@ folder does not exist, so the hidden tests travel inside the command itself.
 Edit hidden/hidden.test.js, then run: python3 eval/build_workload.py
 """
 
+import hashlib
 import json
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 hidden = (HERE / "hidden" / "hidden.test.js").read_text()
+REPO = HERE.parent
+originals = {
+    f.relative_to(REPO).as_posix(): hashlib.sha256(f.read_bytes()).hexdigest()
+    for f in sorted((REPO / "test").glob("*.test.ts"))
+}
+hidden = hidden.replace('"__ORIGINAL_TEST_FILES__"', json.dumps(originals))
 assert "DARKMUX_HIDDEN" not in hidden
 command = (
     "mkdir -p .darkmux_hidden && cat > .darkmux_hidden/auth77.test.js <<'DARKMUX_HIDDEN'\n"

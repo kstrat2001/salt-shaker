@@ -13,7 +13,9 @@ embeds the hidden tests in the command. After editing them, run
 
 A run passes when every test, the model's and the hidden ones, is green, the
 model added tests, the suite still passes from a different path, and the reply
-is present. Scope is not graded, since the ticket requires source changes.
+is present. Scope is not graded, since the ticket requires source changes. The ticket's
+"Do not change the existing test files at all" is enforced by one more hidden
+check, which compares each existing test file with its hash.
 `timingSafeEqual` is in the ticket but not graded: no behavioral test can observe it.
 
 The sandbox and the grader run in `node:24-slim`, pinned by digest in the

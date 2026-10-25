@@ -31,7 +31,7 @@ Existing tests:
 - Repo root: ${SANDBOX_DIR}.
 - Use only Node's standard library (`node:crypto` has `scryptSync`, `randomBytes` and `timingSafeEqual`). There is no install step.
 - This is TypeScript that Node runs directly, with no build step: Node strips the types. Use only syntax that can be stripped (no `enum`, `namespace` or constructor parameter properties) and import local files with their `.ts` extension. There is no type checker in this environment.
-- Do not modify `test/portability.test.ts`. Add tests for the new behavior; tests must not embed absolute paths.
+- Add your tests for the new behavior in a new file under `test/`. Do not change the existing test files at all. Tests must not embed absolute paths.
 - Iterate by running the suite:
   cd ${SANDBOX_DIR} && npm test
 - Final verification is the same command:
