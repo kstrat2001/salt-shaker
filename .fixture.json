@@ -1,0 +1,24 @@
+{
+  "name": "salt-shaker",
+  "version": "1.0",
+  "satisfies": "node-salt-shaker@1.0",
+  "language": "typescript",
+  "verify_command": "npm test",
+  "baseline": {
+    "test_count": 7,
+    "service_test_files": [
+      "test/accounts.test.ts",
+      "test/portability.test.ts"
+    ]
+  },
+  "required_files": [
+    "src/accounts.ts",
+    "src/passwords.ts",
+    "test/accounts.test.ts",
+    "test/portability.test.ts",
+    "package.json",
+    "eval/workloads/salt-shaker.json"
+  ],
+  "schema_version": "1.1",
+  "eval_dir": "eval"
+}

@@ -1,0 +1,14 @@
+{
+  "name": "salt-shaker",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "An account service that stores passwords — a self-contained fixture for exercising coding agents on security-sensitive code.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.ts"
+  }
+}
