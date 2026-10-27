@@ -34,7 +34,124 @@
             "## Reply format"
           ],
           "required": true
-        }
+        },
+        "criteria": [
+          {
+            "id": "hash-format",
+            "name": "Salted scrypt hash",
+            "description": "hashPassword returns scrypt$N$r$p$salt$hash at N=16384, r=8, p=1, with a fresh 16-byte salt every call.",
+            "source": {
+              "path": "eval/hidden/hidden.test.js",
+              "anchor": "it(\"r1 hash has the scrypt format and parameters\""
+            },
+            "tests": [
+              "r1 hash has the scrypt format and parameters",
+              "r1 hash key is the scrypt key of the password and salt",
+              "r1 hashing the same password twice gives different salts"
+            ]
+          },
+          {
+            "id": "verify-never-throws",
+            "name": "Verify never throws",
+            "description": "verifyPassword accepts the right password, refuses a wrong one, and returns false for a malformed stored value instead of throwing.",
+            "source": {
+              "path": "eval/hidden/hidden.test.js",
+              "anchor": "it(\"r2 verify accepts the right password and refuses a wrong one\""
+            },
+            "tests": [
+              "r2 verify accepts the right password and refuses a wrong one",
+              "r2 verify returns false for malformed stored values without throwing"
+            ]
+          },
+          {
+            "id": "stored-parameters",
+            "name": "Parameters read from the hash",
+            "description": "verifyPassword reads N, r and p from the stored string, so a hash made with other parameters still verifies.",
+            "source": {
+              "path": "eval/hidden/hidden.test.js",
+              "anchor": "it(\"r3 verify reads N, r and p from the stored string\""
+            },
+            "tests": [
+              "r3 verify reads N, r and p from the stored string"
+            ]
+          },
+          {
+            "id": "nfc-normalized",
+            "name": "Unicode normalized",
+            "description": "Composed and decomposed forms of the same password both verify.",
+            "source": {
+              "path": "eval/hidden/hidden.test.js",
+              "anchor": "it(\"r4 composed and decomposed forms of a password both verify\""
+            },
+            "tests": [
+              "r4 composed and decomposed forms of a password both verify"
+            ]
+          },
+          {
+            "id": "weak-password",
+            "name": "Weak passwords refused",
+            "description": "register and changePassword throw WeakPassword below 12 or above 256 characters, counted after normalization, and store nothing.",
+            "source": {
+              "path": "eval/hidden/hidden.test.js",
+              "anchor": "it(\"r5 register refuses short and overlong passwords and stores nothing\""
+            },
+            "tests": [
+              "r5 register refuses short and overlong passwords and stores nothing",
+              "r5 length is counted after normalization",
+              "r5 changePassword refuses a weak new password and keeps the old one"
+            ]
+          },
+          {
+            "id": "same-error",
+            "name": "No account enumeration",
+            "description": "An unknown email and a wrong password throw the same InvalidCredentials, and a wrong current password changes nothing.",
+            "source": {
+              "path": "eval/hidden/hidden.test.js",
+              "anchor": "it(\"r6 unknown email and wrong password throw the same InvalidCredentials\""
+            },
+            "tests": [
+              "r6 unknown email and wrong password throw the same InvalidCredentials",
+              "r6 changePassword with a wrong current password changes nothing"
+            ]
+          },
+          {
+            "id": "legacy-upgrade",
+            "name": "Legacy hashes upgraded",
+            "description": "A successful login upgrades a sha256 hash to scrypt; a failed login leaves it untouched.",
+            "source": {
+              "path": "eval/hidden/hidden.test.js",
+              "anchor": "it(\"r7 a legacy sha256 user is upgraded to scrypt on a successful login\""
+            },
+            "tests": [
+              "r7 a legacy sha256 user is upgraded to scrypt on a successful login",
+              "r7 a failed login leaves a legacy hash untouched"
+            ]
+          },
+          {
+            "id": "weak-rehash",
+            "name": "Weaker scrypt rehashed",
+            "description": "A successful login with a scrypt hash below N=16384 rehashes it at the current parameters.",
+            "source": {
+              "path": "eval/hidden/hidden.test.js",
+              "anchor": "it(\"r8 a weaker scrypt hash is rehashed at the current parameters\""
+            },
+            "tests": [
+              "r8 a weaker scrypt hash is rehashed at the current parameters"
+            ]
+          },
+          {
+            "id": "no-plaintext",
+            "name": "No plaintext stored",
+            "description": "The stored record never contains the plaintext password, in any field.",
+            "source": {
+              "path": "eval/hidden/hidden.test.js",
+              "anchor": "it(\"r9 the stored record never contains the plaintext\""
+            },
+            "tests": [
+              "r9 the stored record never contains the plaintext"
+            ]
+          }
+        ]
       }
     },
     "image": "node:24-slim@sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205"
