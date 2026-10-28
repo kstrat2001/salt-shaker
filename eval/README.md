@@ -3,6 +3,9 @@
 This folder is never copied into the model's sandbox. `workloads/salt-shaker.json`
 holds the prompt and the grading rules; each rule quotes the prompt sentence it grades.
 `DESCRIPTION.md` is the eval's public write-up: the attack and the incidents it comes from.
+`roles/coder.json` and `roles/coder.md` are the role the model runs as, system prompt
+included: darkmux's built-in `coder`, copied in so the eval pins it. darkmux reads the role from
+here, never from the machine's own settings, and each run records the sha256 of both files.
 
 The suite check runs the result's own tests plus the hidden checks in
 `hidden/hidden.test.js`, one or more per numbered requirement of ticket

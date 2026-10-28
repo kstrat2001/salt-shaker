@@ -1,6 +1,6 @@
 {
   "name": "salt-shaker",
-  "version": "1.2",
+  "version": "1.3",
   "satisfies": "node-salt-shaker@1.0",
   "language": "typescript",
   "verify_command": "npm test",
@@ -17,8 +17,10 @@
     "test/accounts.test.ts",
     "test/portability.test.ts",
     "package.json",
-    "eval/workloads/salt-shaker.json"
+    "eval/workloads/salt-shaker.json",
+    "eval/roles/coder.json",
+    "eval/roles/coder.md"
   ],
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "eval_dir": "eval"
 }
