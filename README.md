@@ -6,6 +6,21 @@ passwords. The subject is a small account service (sign-up, sign-in, password
 changes) that still stores passwords the way it did on day one, and a ticket
 that asks to move it to salted scrypt without locking anyone out.
 
+## At a glance
+
+| | |
+| --- | --- |
+| Kind | Coding with tools: the model edits and runs a sandboxed copy of this repo, without `eval/` |
+| Version | 1.3 (tag `1.3`, commit `71acd9a`) |
+| Criteria | 9, each recorded as met or missed on every run |
+| Results | [evals.darkmux.com/evals/salt-shaker](https://evals.darkmux.com/evals/salt-shaker) |
+| Needs | darkmux 5.9.0 or later |
+| License | MIT |
+
+The eval's page on evals.darkmux.com names the approved commit, lists the
+criteria and shows which ones each run met. The criteria are not listed here
+because this file is inside the model's sandbox.
+
 ## The task
 
 `TASK.md` is the prompt an agent receives, verbatim: ticket AUTH-77. It
@@ -30,21 +45,6 @@ npm test          # 7 passing, no install step, no dependencies
 TypeScript, run directly by Node 22.18 or newer (Node strips the types; no
 build step). The suite uses Node's built-in test runner. `tsconfig.json` is
 there for editors and `tsc --noEmit`; nothing needs it to run.
-
-## At a glance
-
-| | |
-| --- | --- |
-| Kind | Coding with tools: the model edits and runs a sandboxed copy of this repo, without `eval/` |
-| Version | 1.3 (tag `1.3`, commit `71acd9a`) |
-| Criteria | 9, each recorded as met or missed on every run |
-| Results | [evals.darkmux.com/evals/salt-shaker](https://evals.darkmux.com/evals/salt-shaker) |
-| Needs | darkmux 5.9.0 or later |
-| License | MIT |
-
-The eval's page on evals.darkmux.com names the approved commit, lists the
-criteria and shows which ones each run met. They are not listed in this file
-because this file is inside the model's sandbox.
 
 ## Run it with darkmux
 
