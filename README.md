@@ -31,16 +31,44 @@ TypeScript, run directly by Node 22.18 or newer (Node strips the types; no
 build step). The suite uses Node's built-in test runner. `tsconfig.json` is
 there for editors and `tsc --noEmit`; nothing needs it to run.
 
-## Using it as a darkmux fixture
+## At a glance
+
+| | |
+| --- | --- |
+| Kind | Coding with tools: the model edits and runs a sandboxed copy of this repo, without `eval/` |
+| Version | 1.3 (tag `1.3`, commit `71acd9a`) |
+| Criteria | 9, each recorded as met or missed on every run |
+| Results | [evals.darkmux.com/evals/salt-shaker](https://evals.darkmux.com/evals/salt-shaker) |
+| Needs | darkmux 5.9.0 or later |
+| License | MIT |
+
+The eval's page on evals.darkmux.com names the approved commit, lists the
+criteria and shows which ones each run met. They are not listed in this file
+because this file is inside the model's sandbox.
+
+## Run it with darkmux
+
+```bash
+git clone https://github.com/kstrat2001/salt-shaker
+cd salt-shaker
+git checkout <approved commit>     # named on the eval's page
+darkmux lab fixture register .
+darkmux lab run salt-shaker -p <profile>
+darkmux run inspect <run id>       # the verdict, time and turns
+```
+
+Leave the checkout unchanged: a run from any other commit, or from a checkout
+with changes in it, cannot be shared. To share a run on evals.darkmux.com, run
+`darkmux lab submit <run id> --dry-run` to see exactly what would be sent, then
+`darkmux lab submit <run id>`. The
+[share-runs guide](https://darkmux.com/guide/share-runs.html) covers upload
+access and what a bundle carries.
+
+## What `eval/` holds
 
 `eval/` holds the darkmux workload (`eval/workloads/salt-shaker.json`) and the
 hidden checks, and pins the Node 24 image the model works in and the grader
 runs in. `eval/` is never copied into the model's sandbox.
-
-```bash
-darkmux lab fixture register /path/to/salt-shaker
-darkmux lab run salt-shaker -p <profile>
-```
 
 ## License
 
